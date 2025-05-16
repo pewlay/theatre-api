@@ -1,5 +1,6 @@
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.utils import timezone
 from rest_framework.pagination import PageNumberPagination
@@ -92,9 +93,12 @@ class PerformanceViewSet(viewsets.ModelViewSet):
 class TicketViewSet(viewsets.ModelViewSet):
     queryset = Ticket.objects.select_related('performance', 'user').all()
     serializer_class = TicketSerializer
-    permission_classes = [IsOwnerOrAdmin]
+    permission_classes = [IsAuthenticated, IsOwnerOrAdmin]
     pagination_class = StandardResultsSetPagination
     throttle_classes = [UserRateThrottle]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
     @action(detail=False, methods=["get"])
     def user_tickets(self, request):
@@ -106,12 +110,16 @@ class TicketViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(tickets, many=True)
         return Response(serializer.data)
 
+
 class ReservationViewSet(viewsets.ModelViewSet):
     queryset = Reservation.objects.select_related('user').prefetch_related('tickets').all()
     serializer_class = ReservationSerializer
     permission_classes = [IsOwnerOrAdmin]
     pagination_class = StandardResultsSetPagination
     throttle_classes = [UserRateThrottle]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
     @action(detail=False, methods=["get"])
     def my_reservations(self, request):
@@ -122,3 +130,4 @@ class ReservationViewSet(viewsets.ModelViewSet):
             return self.get_paginated_response(serializer.data)
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
+
