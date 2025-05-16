@@ -1,0 +1,114 @@
+[
+  {
+    "model": "theatre.genre",
+    "pk": 1,
+    "fields": {"name": "Drama"}
+  },
+  {
+    "model": "theatre.genre",
+    "pk": 2,
+    "fields": {"name": "Comedy"}
+  },
+  {
+    "model": "theatre.genre",
+    "pk": 3,
+    "fields": {"name": "Tragedy"}
+  },
+  {
+    "model": "theatre.genre",
+    "pk": 4,
+    "fields": {"name": "Musical"}
+  },
+  {
+    "model": "theatre.actor",
+    "pk": 1,
+    "fields": {"first_name": "John", "last_name": "Smith"}
+  },
+  {
+    "model": "theatre.actor",
+    "pk": 2,
+    "fields": {"first_name": "Anna", "last_name": "Brown"}
+  },
+  {
+    "model": "theatre.actor",
+    "pk": 3,
+    "fields": {"first_name": "Michael", "last_name": "Johnson"}
+  },
+  {
+    "model": "theatre.actor",
+    "pk": 4,
+    "fields": {"first_name": "Olivia", "last_name": "Davis"}
+  },
+  {
+    "model": "theatre.actor",
+    "pk": 5,
+    "fields": {"first_name": "David", "last_name": "Wilson"}
+  },
+  {
+    "model": "theatre.play",
+    "pk": 1,
+    "fields": {
+      "title": "Hamlet",
+      "description": "A Shakespearean tragedy.",
+      "genre": 3,
+      "actors": [1, 2]
+    }
+  },
+  {
+    "model": "theatre.play",
+    "pk": 2,
+    "fields": {
+      "title": "The Importance of Being Earnest",
+      "description": "A classic comedy by Oscar Wilde.",
+      "genre": 2,
+      "actors": [3, 4]
+    }
+  },
+  {
+    "model": "theatre.play",
+    "pk": 3,
+    "fields": {
+      "title": "Les Misérables",
+      "description": "A famous musical.",
+      "genre": 4,
+      "actors": [2, 5]
+    }
+  },
+  {
+    "model": "theatre.theatrehall",
+    "pk": 1,
+    "fields": {"name": "Main Hall", "rows": 15, "seats_in_row": 20}
+  },
+  {
+    "model": "theatre.theatrehall",
+    "pk": 2,
+    "fields": {"name": "Small Hall", "rows": 10, "seats_in_row": 15}
+  },
+  {
+    "model": "theatre.performance",
+    "pk": 1,
+    "fields": {
+      "play": 1,
+      "theatre_hall": 1,
+      "show_time": "2025-06-01T19:00:00Z"
+    }
+  },
+  {
+    "model": "theatre.performance",
+    "pk": 2,
+    "fields": {
+      "play": 2,
+      "theatre_hall": 2,
+      "show_time": "2025-06-05T18:30:00Z"
+    }
+  },
+  {
+    "model": "theatre.performance",
+    "pk": 3,
+    "fields": {
+      "play": 3,
+      "theatre_hall": 1,
+      "show_time": "2025-06-10T20:00:00Z"
+    }
+  }
+]
